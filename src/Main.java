@@ -7,6 +7,8 @@ public class Main {
         Player playerA = new Player();
         Player playerB = new Player();
         do {
+            playerA.win = false;
+            playerB.win = false;
             System.out.println("Player A: Choose your move!");
             playerA.move = scan.nextLine().toUpperCase();
             while (!(playerA.move.equals("R")  || playerA.move.equals("P") || playerA.move.equals("S"))){
@@ -41,15 +43,21 @@ public class Main {
             else if (playerB.move.equals("S") && playerA.move.equals("P")) {
                 playerB.win = true;
                 System.out.println("Scissors Cuts Paper!");
-            } else {
+            } else if (playerB.move.equals("P") && playerA.move.equals("S")){
                 playerA.win = true;
                 System.out.println("Scissors Cuts Paper!");
             }
+            // Tie Game
+            else {
+                playerB.win = true;
+                playerA.win = true;
+            }
             // Determine Winner
-            if (playerA.win)
+            if (playerA.win && playerB.win)
+                System.out.println("It's a Tie!");
+            else if (playerA.win) {
                 System.out.println("Player A Wins!");
-            else
-                System.out.println("Player B Wins!");
+            } else System.out.println("Player B Wins!");
             System.out.println("Play Again? (Y/N)");
             do {
                 sentinel = scan.nextLine().toUpperCase();
